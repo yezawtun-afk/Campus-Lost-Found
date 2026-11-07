@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="675" viewBox="0 0 900 675">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#F6F0E8"/><stop offset="1" stop-color="#E6EDF3"/></linearGradient>
+    <linearGradient id="leather" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#B77C45"/><stop offset="1" stop-color="#8A5A34"/></linearGradient>
+    <filter id="sh" x="-30%" y="-30%" width="170%" height="170%"><feDropShadow dx="0" dy="16" stdDeviation="18" flood-color="#0A1F33" flood-opacity="0.18"/></filter>
+    <pattern id="dots" width="26" height="26" patternUnits="userSpaceOnUse"><circle cx="3" cy="3" r="2" fill="#0A1F33" opacity="0.18"/></pattern>
+  </defs>
+  <rect width="900" height="675" fill="url(#bg)"/>
+  <circle cx="742" cy="140" r="150" fill="#FF6B57" opacity="0.10"/>
+  <circle cx="150" cy="565" r="185" fill="#12314E" opacity="0.05"/>
+  <rect x="636" y="432" width="244" height="223" fill="url(#dots)" opacity="0.45"/>
+  <ellipse cx="450" cy="548" rx="215" ry="28" fill="#0A1F33" opacity="0.10"/>
+  <g filter="url(#sh)">
+    <rect x="252" y="240" width="396" height="236" rx="34" fill="#7A4E2C"/>
+    <rect x="286" y="204" width="296" height="58" rx="14" fill="#FFF8EF"/>
+    <rect x="300" y="220" width="214" height="42" rx="10" fill="#E7DFD3"/>
+    <rect x="252" y="302" width="396" height="174" rx="34" fill="url(#leather)"/>
+    <rect x="278" y="332" width="344" height="12" rx="6" fill="#FFFFFF" opacity="0.14"/>
+    <rect x="418" y="352" width="64" height="46" rx="14" fill="#FF6B57"/>
+    <circle cx="450" cy="375" r="9" fill="#FFF8EF"/>
+  </g>
+</svg>

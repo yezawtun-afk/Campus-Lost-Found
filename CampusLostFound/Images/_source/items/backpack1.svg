@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="675" viewBox="0 0 900 675">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#F6F0E8"/><stop offset="1" stop-color="#E7EDF3"/></linearGradient>
+    <linearGradient id="canvas" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1F486A"/><stop offset="1" stop-color="#12314E"/></linearGradient>
+    <filter id="sh" x="-30%" y="-30%" width="170%" height="170%"><feDropShadow dx="0" dy="16" stdDeviation="18" flood-color="#0A1F33" flood-opacity="0.20"/></filter>
+    <pattern id="dots" width="26" height="26" patternUnits="userSpaceOnUse"><circle cx="3" cy="3" r="2" fill="#0A1F33" opacity="0.18"/></pattern>
+  </defs>
+  <rect width="900" height="675" fill="url(#bg)"/>
+  <circle cx="160" cy="150" r="150" fill="#FF6B57" opacity="0.10"/>
+  <circle cx="755" cy="565" r="175" fill="#12314E" opacity="0.05"/>
+  <rect x="30" y="440" width="240" height="215" fill="url(#dots)" opacity="0.45"/>
+  <ellipse cx="450" cy="552" rx="190" ry="28" fill="#0A1F33" opacity="0.12"/>
+  <g filter="url(#sh)">
+    <path d="M394 236 a58 58 0 0 1 112 0" fill="none" stroke="#8A5A34" stroke-width="20" stroke-linecap="round"/>
+    <rect x="322" y="222" width="256" height="318" rx="74" fill="url(#canvas)"/>
+    <rect x="322" y="330" width="256" height="16" fill="#0A1F33" opacity="0.35"/>
+    <rect x="366" y="352" width="168" height="132" rx="36" fill="#FF6B57"/>
+    <rect x="398" y="382" width="104" height="10" rx="5" fill="#FFF8EF" opacity="0.7"/>
+    <rect x="322" y="270" width="256" height="12" rx="6" fill="#FFF8EF" opacity="0.12"/>
+    <rect x="436" y="500" width="30" height="22" rx="8" fill="#8A5A34"/>
+  </g>
+</svg>

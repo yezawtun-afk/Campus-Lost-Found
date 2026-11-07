@@ -1,0 +1,106 @@
+<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="CampusLostFound.SiteMaster" %>
+
+<!DOCTYPE html>
+<html lang="en">
+<head runat="server">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Campus Lost &amp; Found - report lost items, hand in found items and search the campus lost and found register." />
+    <title><%: Page.Title %> | Campus Lost &amp; Found</title>
+
+    <!-- Enables the scroll reveals only while the behaviour script is alive.
+         The watchdog removes the class if site.js never reports back. -->
+    <script>
+        (function () {
+            document.documentElement.className += " js";
+            window.setTimeout(function () {
+                if (!document.documentElement.hasAttribute("data-motion-ready")) {
+                    document.documentElement.classList.remove("js");
+                }
+            }, 2500);
+        }());
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="<%= ResolveUrl("~/Content/Site.css") %>?v=<%= CssVersion %>" />
+    <script src="<%= ResolveUrl("~/Content/site.js") %>" defer></script>
+
+    <asp:ContentPlaceHolder ID="HeadContent" runat="server" />
+</head>
+<body>
+    <form id="form1" runat="server">
+        <a class="skip-link" href="#main-content">Skip to content</a>
+
+        <header class="site-header">
+            <div class="container header-inner">
+                <a class="brand" href="<%= ResolveUrl("~/Default.aspx") %>">
+                    <span class="brand-text">Campus <span>Lost &amp; Found</span></span>
+                </a>
+
+                <nav class="site-nav" aria-label="Main navigation">
+                    <a class="<%= NavClass("Default.aspx") %>" href="<%= ResolveUrl("~/Default.aspx") %>">Home</a>
+                    <a class="<%= NavClass("About.aspx") %>" href="<%= ResolveUrl("~/About.aspx") %>">About</a>
+                    <a class="<%= NavClass("Items.aspx") %>" href="<%= ResolveUrl("~/Items.aspx") %>">Lost &amp; Found</a>
+                    <a class="<%= NavClass("Search.aspx") %>" href="<%= ResolveUrl("~/Search.aspx") %>">Search</a>
+                    <a class="<%= NavActionClass("Report.aspx") %>" href="<%= ResolveUrl("~/Report.aspx") %>">Report Item</a>
+                </nav>
+            </div>
+        </header>
+
+        <main id="main-content">
+            <asp:ContentPlaceHolder ID="MainContent" runat="server" />
+        </main>
+
+        <footer class="site-footer">
+            <div class="container">
+                <div class="footer-board">
+                    <div class="footer-tile footer-tile--brand">
+                        <a class="footer-wordmark" href="<%= ResolveUrl("~/Default.aspx") %>">Campus Lost &amp; Found</a>
+                        <p>One trusted place for students and staff to report lost items, hand in found items and get them back where they belong.</p>
+                    </div>
+
+                    <a class="footer-tile footer-tile--action" href="<%= ResolveUrl("~/Report.aspx") %>">
+                        <span class="footer-action-text">Report an item</span>
+                        <svg viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="4" aria-hidden="true">
+                            <path d="M4 22h34"></path>
+                            <path d="M24 8l14 14-14 14"></path>
+                        </svg>
+                    </a>
+
+                    <div class="footer-tile footer-tile--small">
+                        <h2>Explore</h2>
+                        <a href="<%= ResolveUrl("~/Default.aspx") %>">Home</a>
+                        <a href="<%= ResolveUrl("~/About.aspx") %>">About the portal</a>
+                        <a href="<%= ResolveUrl("~/Items.aspx") %>">Browse items</a>
+                        <a href="<%= ResolveUrl("~/Search.aspx") %>">Search the register</a>
+                    </div>
+
+                    <div class="footer-tile footer-tile--small">
+                        <h2>Get help</h2>
+                        <a href="<%= ResolveUrl("~/Report.aspx?type=Lost") %>">Report a lost item</a>
+                        <a href="<%= ResolveUrl("~/Report.aspx?type=Found") %>">Hand in a found item</a>
+                        <a href="<%= ResolveUrl("~/About.aspx#guidelines") %>">Claiming guidelines</a>
+                    </div>
+
+                    <div class="footer-tile footer-tile--small">
+                        <h2>Security Office</h2>
+                        <p>Block A, Ground Floor<br />Mon - Fri, 8:00 a.m. - 5:30&nbsp;p.m.</p>
+                        <a href="mailto:security.office@campus.edu">security.office@campus.edu</a>
+                    </div>
+                </div>
+
+                <div class="footer-bottom">
+                    <p>&copy; <%= Year %> Campus Lost &amp; Found Portal</p>
+                    <p class="footer-links">
+                        <a href="<%= ResolveUrl("~/About.aspx") %>">About</a>
+                        <span aria-hidden="true">&middot;</span>
+                        <a href="<%= ResolveUrl("~/Admin.aspx") %>">Admin</a>
+                    </p>
+                </div>
+            </div>
+        </footer>
+    </form>
+</body>
+</html>

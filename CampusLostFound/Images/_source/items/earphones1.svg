@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="675" viewBox="0 0 900 675">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#F6F0E8"/><stop offset="1" stop-color="#E6EDF3"/></linearGradient>
+    <filter id="sh" x="-30%" y="-30%" width="170%" height="170%"><feDropShadow dx="0" dy="16" stdDeviation="18" flood-color="#0A1F33" flood-opacity="0.18"/></filter>
+    <pattern id="dots" width="26" height="26" patternUnits="userSpaceOnUse"><circle cx="3" cy="3" r="2" fill="#0A1F33" opacity="0.18"/></pattern>
+  </defs>
+  <rect width="900" height="675" fill="url(#bg)"/>
+  <circle cx="160" cy="150" r="150" fill="#FF6B57" opacity="0.10"/>
+  <circle cx="750" cy="560" r="180" fill="#12314E" opacity="0.05"/>
+  <rect x="30" y="450" width="240" height="205" fill="url(#dots)" opacity="0.45"/>
+  <ellipse cx="450" cy="548" rx="225" ry="28" fill="#0A1F33" opacity="0.10"/>
+  <g filter="url(#sh)">
+    <g transform="rotate(-10 380 260)">
+      <rect x="336" y="196" width="88" height="126" rx="42" fill="#FFF8EF"/>
+      <rect x="358" y="300" width="44" height="86" rx="22" fill="#FFF8EF"/>
+      <circle cx="380" cy="248" r="16" fill="#FF6B57"/>
+    </g>
+    <g transform="rotate(12 530 260)">
+      <rect x="486" y="196" width="88" height="126" rx="42" fill="#FFF8EF"/>
+      <rect x="508" y="300" width="44" height="86" rx="22" fill="#FFF8EF"/>
+      <circle cx="530" cy="248" r="16" fill="#FF6B57"/>
+    </g>
+    <rect x="326" y="352" width="268" height="188" rx="44" fill="#12314E"/>
+    <rect x="326" y="398" width="268" height="10" rx="5" fill="#FF6B57"/>
+    <circle cx="460" cy="470" r="17" fill="#FFF8EF" opacity="0.85"/>
+    <rect x="424" y="500" width="72" height="10" rx="5" fill="#FFF8EF" opacity="0.28"/>
+  </g>
+</svg>

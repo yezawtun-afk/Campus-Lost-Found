@@ -1,0 +1,14 @@
+# Visual Studio build output and per-user files
+.vs/
+bin/
+obj/
+*.user
+*.suo
+*.cache
+
+# Design QA screenshots and reports (kept on disk, not part of the deliverable)
+.taste-skill/
+
+# OS clutter
+Thumbs.db
+desktop.ini

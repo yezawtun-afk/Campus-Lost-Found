@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="750" viewBox="0 0 1000 750">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0E2740"/><stop offset="1" stop-color="#17405F"/></linearGradient>
+    <linearGradient id="counter" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#21496B"/><stop offset="1" stop-color="#12314E"/></linearGradient>
+    <filter id="sh" x="-30%" y="-30%" width="170%" height="170%"><feDropShadow dx="0" dy="14" stdDeviation="16" flood-color="#04121F" flood-opacity="0.45"/></filter>
+    <pattern id="grid" width="50" height="50" patternUnits="userSpaceOnUse"><path d="M50 0 H0 V50" fill="none" stroke="#FFFFFF" stroke-opacity="0.04" stroke-width="1"/></pattern>
+  </defs>
+  <rect width="1000" height="750" fill="url(#bg)"/>
+  <rect width="1000" height="750" fill="url(#grid)"/>
+  <circle cx="820" cy="140" r="200" fill="#FF6B57" opacity="0.12"/>
+  <circle cx="170" cy="640" r="220" fill="#FF6B57" opacity="0.07"/>
+
+  <!-- counter / table -->
+  <rect x="0" y="560" width="1000" height="190" fill="url(#counter)"/>
+  <rect x="0" y="560" width="1000" height="10" fill="#FF6B57" opacity="0.55"/>
+  <ellipse cx="500" cy="586" rx="330" ry="26" fill="#04121F" opacity="0.35"/>
+
+  <!-- open lost-and-found box -->
+  <g filter="url(#sh)">
+    <path d="M300 430 L500 392 L700 430 L700 566 L500 606 L300 566 Z" fill="#E7D9C4"/>
+    <path d="M300 430 L500 392 L500 470 L300 508 Z" fill="#D3C0A6"/>
+    <path d="M500 392 L700 430 L700 470 L500 470 Z" fill="#F6EBDC"/>
+    <path d="M300 430 L222 382 L420 344 L500 392 Z" fill="#FFF8EF"/>
+    <path d="M700 430 L778 382 L778 520 L700 566 Z" fill="#FFF8EF"/>
+    <rect x="330" y="500" width="76" height="52" rx="12" fill="#FF6B57"/>
+    <circle cx="368" cy="526" r="7" fill="#FFF8EF"/>
+
+    <!-- items inside the box -->
+    <g transform="translate(520 430) rotate(-12)">
+      <rect x="0" y="0" width="130" height="82" rx="10" fill="#FFF8EF"/>
+      <rect x="0" y="0" width="130" height="22" rx="10" fill="#FF6B57"/>
+    </g>
+    <g transform="translate(470 466) rotate(8)">
+      <circle cx="0" cy="0" r="22" fill="none" stroke="#12314E" stroke-width="7"/>
+      <rect x="19" y="-5" width="70" height="10" rx="5" fill="#12314E"/>
+      <rect x="66" y="5" width="10" height="20" rx="4" fill="#12314E"/>
+    </g>
+  </g>
+
+  <!-- magnifying glass -->
+  <g filter="url(#sh)">
+    <circle cx="742" cy="300" r="96" fill="#FFF8EF" opacity="0.14"/>
+    <circle cx="742" cy="300" r="96" fill="none" stroke="#FFF8EF" stroke-width="20" opacity="0.9"/>
+    <rect x="800" y="366" width="28" height="140" rx="14" fill="#FF6B57" transform="rotate(-40 814 436)"/>
+    <circle cx="712" cy="268" r="26" fill="#FF8A75" opacity="0.45"/>
+  </g>
+
+  <!-- location pins -->
+  <g>
+    <g transform="translate(220 220)">
+      <path d="M0 34 C0 34 26 6 26 -10 A26 26 0 1 0 -26 -10 C-26 6 0 34 0 34 Z" fill="#FF6B57"/>
+      <circle cx="0" cy="-10" r="10" fill="#0E2740" opacity="0.6"/>
+    </g>
+    <g transform="translate(320 140) scale(0.7)">
+      <path d="M0 34 C0 34 26 6 26 -10 A26 26 0 1 0 -26 -10 C-26 6 0 34 0 34 Z" fill="#FFB3A6" opacity="0.75"/>
+    </g>
+    <circle cx="220" cy="220" r="52" fill="none" stroke="#FF6B57" stroke-opacity="0.3" stroke-width="2"/>
+  </g>
+
+  <!-- checklist card -->
+  <g filter="url(#sh)" transform="translate(100 330) rotate(-6)">
+    <rect x="0" y="0" width="150" height="180" rx="14" fill="#FFF8EF" opacity="0.96"/>
+    <rect x="20" y="24" width="80" height="10" rx="5" fill="#12314E" opacity="0.5"/>
+    <circle cx="26" cy="62" r="8" fill="#FF6B57"/><rect x="44" y="56" width="86" height="9" rx="4" fill="#12314E" opacity="0.25"/>
+    <circle cx="26" cy="94" r="8" fill="#FF6B57"/><rect x="44" y="88" width="70" height="9" rx="4" fill="#12314E" opacity="0.25"/>
+    <circle cx="26" cy="126" r="8" fill="#12314E" opacity="0.2"/><rect x="44" y="120" width="80" height="9" rx="4" fill="#12314E" opacity="0.18"/>
+  </g>
+
+  <!-- dotted route -->
+  <path d="M250 250 C 380 180 470 240 560 200" fill="none" stroke="#FFB3A6" stroke-width="3" stroke-dasharray="3 12" stroke-linecap="round" opacity="0.7"/>
+</svg>
