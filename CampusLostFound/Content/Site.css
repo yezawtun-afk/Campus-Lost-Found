@@ -484,8 +484,11 @@ li { margin-bottom: 0.4rem; }
     white-space: nowrap;
 }
 
+/* Status colours are fixed by the assignment brief: lost red, found green,
+   claimed grey. Green reuses the existing --success token rather than adding
+   a fourth brand colour. */
 .badge-lost { background: var(--coral); color: var(--on-coral); }
-.badge-found { background: var(--ink); color: #fff; }
+.badge-found { background: var(--success); color: #fff; }
 .badge-claimed { background: var(--field-mist); color: var(--ink); }
 
 /* 8. Forms ----------------------------------------------------------------- */
