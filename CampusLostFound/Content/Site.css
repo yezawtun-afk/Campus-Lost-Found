@@ -241,6 +241,7 @@ li { margin-bottom: 0.4rem; }
     font-weight: 800;
     letter-spacing: -0.03em;
     white-space: nowrap;
+    text-decoration: none;
 }
 
 .brand:hover { color: var(--ink); }
@@ -270,26 +271,34 @@ li { margin-bottom: 0.4rem; }
     font-weight: 500;
     line-height: 1.2;
     white-space: nowrap;
+    text-decoration: none;
 }
 
 .nav-link:hover { color: var(--coral-dark); }
 
+/* The current page is marked by a coral rule under the word, so the one
+   filled block in the header stays reserved for "Report Item". */
 .nav-link.is-active {
-    background: var(--coral);
     color: var(--ink);
     font-weight: 700;
+    text-decoration: underline;
+    text-decoration-color: var(--coral);
+    text-decoration-thickness: 2px;
+    text-underline-offset: 6px;
 }
 
 .nav-action {
-    margin-left: 8px;
+    margin-left: 16px;
+    padding: 12px 20px;
     background: var(--ink);
     color: #fff;
     font-weight: 700;
+    border: 2px solid var(--ink);
 }
 
-.nav-action:hover { background: var(--navy-600); color: #fff; }
+.nav-action:hover { background: var(--navy-600); border-color: var(--navy-600); color: #fff; }
 
-.nav-action.is-active { background: var(--coral); color: var(--ink); }
+.nav-action.is-active { background: var(--coral); border-color: var(--coral); color: var(--ink); }
 
 /* 5. Buttons --------------------------------------------------------------- */
 .btn {
@@ -703,6 +712,9 @@ li { margin-bottom: 0.4rem; }
 
 /* 11. Hero ----------------------------------------------------------------- */
 .hero {
+    /* Shared by the field and the headline, so the seam always lands in the
+       gap between the two lines of the tagline. */
+    --waterline: 44%;
     position: relative;
     display: grid;
     min-height: clamp(560px, 70svh, 660px);
@@ -715,7 +727,8 @@ li { margin-bottom: 0.4rem; }
 .hero::before {
     content: "";
     position: absolute;
-    inset: 0 0 56% 0;
+    inset: 0 0 auto 0;
+    height: var(--waterline);
     background: var(--field-coral);
 }
 
@@ -731,35 +744,34 @@ li { margin-bottom: 0.4rem; }
     position: absolute;
     left: var(--gutter);
     right: var(--gutter);
-    top: 44%;
+    top: var(--waterline);
     transform: translateY(-50%);
     margin: 0;
     display: grid;
     font-size: var(--step-5);
     font-weight: 800;
-    line-height: 0.92;
+    line-height: 1;
     letter-spacing: -0.045em;
 }
 
-.hero-copy { grid-area: 1 / 1; display: block; }
+/* Both lines are white, so the tagline reads as one statement across the
+   seam rather than as two differently coloured halves. */
+.hero-copy {
+    grid-area: 1 / 1;
+    display: grid;
+    row-gap: 0.16em;
+    color: var(--on-ink);
+}
 
+/* The mask is what the line-rise animation slides out of; the bottom padding
+   gives the descender of "Something?" room inside it. */
 .hero-line {
     display: block;
     overflow: hidden;
-    padding-bottom: 0.08em;
+    padding-bottom: 0.2em;
 }
 
 .hero-line > span { display: block; }
-
-.hero-copy--above {
-    color: var(--ink);
-    clip-path: inset(0 0 50% 0);
-}
-
-.hero-copy--below {
-    color: var(--on-ink);
-    clip-path: inset(50% 0 0 0);
-}
 
 .hero-foot {
     grid-row: 2;
@@ -799,7 +811,7 @@ li { margin-bottom: 0.4rem; }
     display: grid;
     grid-template-columns: minmax(0, 1fr) minmax(0, 0.95fr);
     gap: clamp(28px, 5vw, 72px);
-    align-items: center;
+    align-items: start;
 }
 
 .intro h2 { margin-bottom: 20px; }
@@ -1379,6 +1391,14 @@ html.js [data-reveal].is-in { opacity: 1; }
     .step p { max-width: 52ch; }
 }
 
+/* Tablets: the five links and the action still share one row, one type step
+   down, so "Report Item" never pushes past the page margin. */
+@media (min-width: 761px) and (max-width: 900px) {
+    .nav-link,
+    .nav-action { padding: 9px 10px; font-size: var(--step-1); }
+    .nav-action { margin-left: 10px; padding: 10px 14px; }
+}
+
 /* Phones: the wordmark keeps the first row, the five links share the second.
    The links shrink rather than scroll, so "Report Item" is never half cut. */
 @media (max-width: 760px) {
@@ -1402,9 +1422,7 @@ html.js [data-reveal].is-in { opacity: 1; }
     .nav-action { margin-left: 0; }
     /* The foot stacks, so the headline moves up and the field is repainted
        to keep the waterline between the two lines of the tagline. */
-    .hero { min-height: clamp(660px, 86svh, 820px); }
-    .hero::before { inset: 0 0 58% 0; }
-    .hero-headline { top: 42%; }
+    .hero { min-height: clamp(660px, 86svh, 820px); --waterline: 42%; }
     .hero-foot { flex-direction: column; align-items: flex-start; gap: 24px; }
     .hero-lede { flex: 0 1 auto; max-width: 46ch; }
     .hero-actions { justify-content: flex-start; margin-left: 0; width: 100%; }

@@ -5,12 +5,10 @@
     <!-- 1. Hero: two flat fields meeting at the waterline. -->
     <section class="hero">
         <div class="container hero-inner">
+            <!-- One copy of the tagline: both lines are white, and the coral /
+                 ink seam passes through the gap between them. -->
             <h1 class="hero-headline">
-                <span class="hero-copy hero-copy--above" aria-hidden="true">
-                    <span class="hero-line"><span>Lost Something?</span></span>
-                    <span class="hero-line"><span>Let Us Help You Find It.</span></span>
-                </span>
-                <span class="hero-copy hero-copy--below">
+                <span class="hero-copy">
                     <span class="hero-line"><span>Lost Something?</span></span>
                     <span class="hero-line"><span>Let Us Help You Find It.</span></span>
                 </span>

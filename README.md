@@ -154,7 +154,7 @@ The address should be **http://localhost:44300/**. If a different port appears, 
 address in the address bar; the port is a setting, not part of the app.
 
 You should land on the home page: the tagline "Lost Something? Let Us Help You Find It."
-split across a coral and navy seam, with three buttons beneath it.
+sitting across a coral and navy seam, with three buttons beneath it.
 
 To stop the site, close the browser tab and press the red **Stop** button in Visual Studio
 (or **Shift+F5**).
