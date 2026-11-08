@@ -6,6 +6,19 @@ Security Office. Built with ASP.NET Web Forms and SQL Server LocalDB for a group
 
 ![The home page: the tagline sits across a coral and navy seam](docs/home.jpg)
 
+## Quick start
+
+If you already have Visual Studio and LocalDB, these four lines are the whole setup:
+
+```powershell
+git clone https://github.com/yezawtun-afk/Campus-Lost-Found.git
+cd "Campus-Lost-Found"
+sqlcmd -S "(localdb)\MSSQLLocalDB" -E -i "CampusLostFound\Database\LostFoundDB.sql"
+start CampusLostFound.sln
+```
+
+Then press **F5** in Visual Studio. Everything else below is the slow, explained version.
+
 ## What it does
 
 - **Report** a lost or found item, with an optional photo, in one form
@@ -39,6 +52,146 @@ The Admin page is linked from the footer, not the main menu. There is no login, 
 **Admin** - the register as an editable table, plus an add-item form
 ![The editable admin table](docs/admin.jpg)
 
+## Setup tutorial
+
+Follow these steps in order. The first run takes about five minutes; after that you only
+repeat step 5.
+
+### Before you start
+
+You need two things on the same computer:
+
+1. **Visual Studio 2022 or newer** with the **ASP.NET and web development** workload.
+   To check: open the *Visual Studio Installer*, find your installation, click **Modify**,
+   and look for that workload ticked in the list.
+2. **SQL Server Express LocalDB.** This is a small copy of SQL Server that runs only while
+   you use it, so there is no server to start or configure. It is installed with the
+   workload above. To check, open PowerShell and run:
+
+   ```powershell
+   sqllocaldb info
+   ```
+
+   If it prints a name such as `MSSQLLocalDB`, you are ready.
+
+### Step 1 - Get the code
+
+**With Git**, in PowerShell:
+
+```powershell
+cd $HOME\Desktop
+git clone https://github.com/yezawtun-afk/Campus-Lost-Found.git
+cd "Campus-Lost-Found"
+```
+
+**Without Git**: on the GitHub page, click the green **Code** button, then
+**Download ZIP**, and extract it.
+
+Either way you now have a folder containing `CampusLostFound.sln`. A path without
+spaces or `&` is easier for the commands below, for example `C:\Projects\CampusLostFound`.
+The project works from any folder; just use your own path in the next step.
+
+### Step 2 - Create the database
+
+The database does not exist yet. The script in `CampusLostFound\Database` creates it,
+builds both tables, and adds 12 sample items with their reports.
+
+**Option A - PowerShell (fastest).** Run this from the folder that contains
+`CampusLostFound.sln`:
+
+```powershell
+sqlcmd -S "(localdb)\MSSQLLocalDB" -E -i "CampusLostFound\Database\LostFoundDB.sql"
+```
+
+`sqlcmd` is the command-line client for SQL Server. `-S` is the server to connect to,
+`-E` means "use my Windows account", and `-i` is the file to run.
+
+You should see this at the end:
+
+```
+TotalItems  TotalReports
+----------- ------------
+         12           12
+```
+
+If you see 12 and 12, the database is ready.
+
+**Option B - SQL Server Management Studio.** Connect to `(localdb)\MSSQLLocalDB`, open
+`CampusLostFound\Database\LostFoundDB.sql`, and press **Execute** (F5).
+
+> The script drops and recreates `LostFoundDB`, so you can run it again at any time to
+> reset the sample data.
+
+### Step 3 - Open the solution
+
+Double-click **`CampusLostFound.sln`**. Visual Studio opens it and shows the project in
+the *Solution Explorer* on the right, with `Site.master`, the seven pages and `Web.config`
+inside `CampusLostFound`.
+
+If Visual Studio asks to install missing components, accept; they are part of the workload
+from *Before you start*.
+
+### Step 4 - Check the connection string
+
+The app finds the database through one entry in `Web.config`:
+
+```xml
+<add name="LostFoundDB"
+     connectionString="Data Source=(LocalDB)\MSSQLLocalDB;Initial Catalog=LostFoundDB;Integrated Security=True;MultipleActiveResultSets=True"
+     providerName="System.Data.SqlClient" />
+```
+
+`Data Source` is the database server and `Initial Catalog` is the database name. The
+values above match the script, so you normally do not touch this. If your database lives
+on a different server, change those two values and nothing else.
+
+### Step 5 - Run it
+
+Press **F5**, or click the green **Start** button at the top. Visual Studio builds the
+project, starts IIS Express (the small web server it ships with), and opens your browser.
+
+The address should be **http://localhost:44300/**. If a different port appears, use the
+address in the address bar; the port is a setting, not part of the app.
+
+You should land on the home page: the tagline "Lost Something? Let Us Help You Find It."
+split across a coral and navy seam, with three buttons beneath it.
+
+To stop the site, close the browser tab and press the red **Stop** button in Visual Studio
+(or **Shift+F5**).
+
+### Step 6 - Check it works
+
+Give yourself five minutes with these:
+
+| Do this | You should see |
+| --- | --- |
+| Look at "Recently reported" on the home page | Four item cards with status badges |
+| Click **Found** in that section | Only found items, and the coloured band changes |
+| Go to **Search**, type `Wallet`, press Enter | "2 item(s) found", both wallets |
+| Go to **Lost & Found**, click page 2 | Items 10 to 12 of 12 |
+| Go to **Admin** from the footer, change a status | The badge updates immediately |
+| On **Admin**, click Delete on a row | A confirmation dialog appears first |
+
+That covers the database, the forms, the filters and the admin table.
+
+### Running it again later
+
+Open `CampusLostFound.sln` and press **F5**. The database is stored on your machine and
+stays between runs. Run the script from step 2 only if you want to reset the sample data
+or if you moved the project to another computer.
+
+## Troubleshooting
+
+| Symptom | Fix |
+| --- | --- |
+| "We could not connect to the database" | The database does not exist yet. Repeat step 2. |
+| "Cannot open database LostFoundDB requested by the login" | Run the SQL script again while connected to `(localdb)\MSSQLLocalDB`. |
+| `sqlcmd` is not recognised | Open a new PowerShell window after installing Visual Studio, or run it from the SQL Server tools folder. |
+| The browser opens but the page is blank or shows an error | Check that step 2 printed 12 and 12, then reload. |
+| An item shows a grey placeholder photo | Its image file is missing from `Images/items/`. The placeholder is expected. |
+| A photo upload is rejected | Only JPG and PNG up to 4 MB are accepted. |
+| F5 asks to configure IIS Express | Accept the defaults; the project's launch settings are already in `CampusLostFound.csproj`. |
+
 ## Tech stack
 
 | Layer | Choice |
@@ -49,57 +202,6 @@ The Admin page is linked from the footer, not the main menu. There is no login, 
 | Data access | ADO.NET (`SqlCommand` with parameters, `SqlDataAdapter`) |
 | Front end | One master page, one stylesheet, plain HTML/CSS and a small JS file |
 | Tooling | Visual Studio 2022 or newer, IIS Express |
-
-## Getting started
-
-### 1. What you need
-
-- Visual Studio 2022 (or newer) with the **ASP.NET and web development** workload
-- SQL Server Express LocalDB, which Visual Studio installs with that workload
-
-### 2. Create the database (once)
-
-Clone the repository, then run the script from the folder that contains it:
-
-```powershell
-git clone https://github.com/yezawtun-afk/Campus-Lost-Found.git
-cd "Campus-Lost-Found"
-sqlcmd -S "(localdb)\MSSQLLocalDB" -E -i "CampusLostFound\Database\LostFoundDB.sql"
-```
-
-You should see:
-
-```
-TotalItems  TotalReports
-----------  ------------
-        12            12
-```
-
-The script drops and recreates `LostFoundDB`, so running it again resets the sample data.
-
-If you prefer SQL Server Management Studio: connect to `(localdb)\MSSQLLocalDB`, open
-`CampusLostFound\Database\LostFoundDB.sql`, and press Execute.
-
-### 3. Open and run
-
-1. Double-click `CampusLostFound.sln`.
-2. Press **F5**. The site opens at `http://localhost:44300/`.
-
-The connection string in `Web.config` already points at LocalDB:
-
-```xml
-<add name="LostFoundDB"
-     connectionString="Data Source=(LocalDB)\MSSQLLocalDB;Initial Catalog=LostFoundDB;Integrated Security=True;MultipleActiveResultSets=True"
-     providerName="System.Data.SqlClient" />
-```
-
-If your database lives elsewhere, change only `Data Source=` and `Initial Catalog=`.
-
-### 4. Try it
-
-- Search for **Wallet**: both wallets come back.
-- Enter a search and press **Enter** instead of clicking Search.
-- Open `Admin.aspx` from the footer and change a status, then delete a row (it asks first).
 
 ## Database
 
@@ -139,15 +241,6 @@ Campus Lost & Found/
 
 All database access goes through `DbHelper.cs` and uses parameterised queries, so the
 pages are safe from SQL injection.
-
-## Troubleshooting
-
-| Symptom | Fix |
-| --- | --- |
-| "We could not connect to the database" | The database does not exist yet. Repeat step 2. |
-| "Cannot open database LostFoundDB requested by the login" | Run the SQL script again while connected to `(localdb)\MSSQLLocalDB`. |
-| An item shows a grey placeholder photo | Its image file is missing from `Images/items/`. The placeholder is expected. |
-| A photo upload is rejected | Only JPG and PNG up to 4 MB are accepted. |
 
 ---
 
