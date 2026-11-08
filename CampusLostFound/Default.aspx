@@ -23,8 +23,8 @@
                 </p>
                 <div class="hero-actions">
                     <a class="btn btn-primary" href="<%= ResolveUrl("~/Report.aspx?type=Lost") %>">Report lost item</a>
-                    <a class="link-arrow" href="<%= ResolveUrl("~/Report.aspx?type=Found") %>">Hand in a found item</a>
-                    <a class="link-arrow" href="<%= ResolveUrl("~/Items.aspx") %>">Browse the register</a>
+                    <a class="btn btn-outline" href="<%= ResolveUrl("~/Report.aspx?type=Found") %>">Report found item</a>
+                    <a class="btn btn-outline" href="<%= ResolveUrl("~/Items.aspx") %>">Browse items</a>
                 </div>
             </div>
         </div>

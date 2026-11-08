@@ -18,7 +18,7 @@
         <div class="container">
 
             <div class="form-card" data-reveal>
-                <div class="form-grid">
+                <asp:Panel ID="pnlSearchForm" runat="server" CssClass="form-grid" DefaultButton="btnSearch">
 
                     <div class="form-group span-2">
                         <label class="form-label" for="<%= txtKeyword.ClientID %>">Item name keyword</label>
@@ -55,7 +55,7 @@
                                 OnClick="btnReset_Click" CausesValidation="false" />
                         </div>
                     </div>
-                </div>
+                </asp:Panel>
             </div>
         </div>
     </section>

@@ -12,3 +12,6 @@ obj/
 # OS clutter
 Thumbs.db
 desktop.ini
+
+# Editor settings (per-machine)
+.vscode/

@@ -791,6 +791,8 @@ li { margin-bottom: 0.4rem; }
 .hero-actions .link-arrow { color: var(--on-ink); }
 .hero-actions .link-arrow:hover { color: var(--coral); }
 .hero-actions .btn-primary:hover { color: #fff; }
+.hero-actions .btn-outline { color: var(--on-ink); }
+.hero-actions .btn-outline:hover { background: rgba(255, 255, 255, 0.14); color: var(--on-ink); }
 
 /* 12. Home ----------------------------------------------------------------- */
 .intro {
