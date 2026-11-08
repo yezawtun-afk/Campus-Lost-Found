@@ -2,6 +2,9 @@ CAMPUS LOST & FOUND PORTAL
 ==========================
 ASP.NET Web Forms (.NET Framework 4.8) + SQL Server LocalDB
 
+A campus register for reporting lost items, handing in found items and
+searching everything waiting at the Security Office. No login is used.
+
 
 WHAT YOU NEED
 -------------
@@ -18,12 +21,13 @@ Option A - using SQL Server Management Studio (SSMS)
   3. Press Execute (F5). The script drops and recreates LostFoundDB,
      creates the Items and Reports tables, and inserts 12 sample items.
 
-Option B - using a Command Prompt / PowerShell window
-  Copy this line into PowerShell and press Enter (adjust the folder if needed):
+Option B - using PowerShell
+  Open PowerShell in the folder that contains CampusLostFound.sln
+  (the solution folder, one level above this window) and run:
 
-  sqlcmd -S "(localdb)\MSSQLLocalDB" -E -i "C:\Users\Lenovo\Desktop\Campus Lost & Found\CampusLostFound\Database\LostFoundDB.sql"
+  sqlcmd -S "(localdb)\MSSQLLocalDB" -E -i "CampusLostFound\Database\LostFoundDB.sql"
 
-  If you see "TotalItems 12" and "TotalReports 12", it worked.
+  If you see TotalItems 12 and TotalReports 12, it worked.
 
 
 STEP 2 - OPEN THE PROJECT
@@ -48,12 +52,12 @@ STEP 3 - CHECK THE CONNECTION STRING
 STEP 4 - RUN IT
 ---------------
   Press F5 (or the green Start button).
-  Your browser opens on http://localhost:<port>/Default.aspx
+  Your browser opens on http://localhost:44300/
 
 
 PAGES
 -----
-  Default.aspx   Home: hero banner, 3 buttons, recently reported items
+  Default.aspx   Home: tagline, 3 buttons, recently reported items
   About.aspx     Purpose, how it works, reporting steps, claiming rules
   Items.aspx     All items, category filter, sorting, pagination
   Search.aspx    Search by keyword, category, location and status
@@ -62,6 +66,15 @@ PAGES
   Error.aspx     Friendly error page (used by <customErrors>)
 
   The Admin page is linked from the footer, not from the main menu.
+
+
+THINGS TO TRY
+-------------
+  - Search for "Wallet" - both wallets come back.
+  - Type a keyword and press Enter instead of clicking Search.
+  - Filter Items by category, then change the sort order.
+  - On Admin, change a status in the dropdown (it saves immediately),
+    then delete a row (it asks for confirmation first).
 
 
 HOW THE DATABASE IS USED
@@ -74,6 +87,7 @@ HOW THE DATABASE IS USED
 
   All database access goes through DbHelper.cs and uses parameterised
   SqlCommand queries, so the app is safe from SQL injection.
+  Report.aspx writes the Items and Reports rows inside one transaction.
 
 
 TROUBLESHOOTING
@@ -101,5 +115,9 @@ FOLDER MAP
   DbHelper.cs                 connection + query helpers
   Images\                     hero, about, placeholder and item photos
   Images\_source\             the SVG artwork the JPGs were made from
+
+  The solution also has README.md at the top level, which is the version
+  GitHub displays, plus docs\ with the screenshots it uses.
+
 
 Built for a group project - no login or authentication is used.

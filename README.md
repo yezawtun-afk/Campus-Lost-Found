@@ -1,96 +1,153 @@
-CAMPUS LOST & FOUND PORTAL
-==========================
-ASP.NET Web Forms (.NET Framework 4.8) + SQL Server LocalDB
+# Campus Lost & Found Portal
 
-WHAT YOU NEED
--------------
-1. Visual Studio 2022 or newer, with the "ASP.NET and web development" workload.
-2. SQL Server Express LocalDB (installed with Visual Studio).
-3. This folder, copied anywhere on your computer.
+A lost-and-found register for a university campus. Students and staff report what they
+lost, hand in what they found, and search a single register of everything waiting at the
+Security Office. Built with ASP.NET Web Forms and SQL Server LocalDB for a group project.
 
-STEP 1 - CREATE THE DATABASE (only once)
------------------------------------------
-Option A - using SQL Server Management Studio (SSMS)
-  1. Open SSMS and connect to:   (localdb)\MSSQLLocalDB
-  2. File > Open > File...  and choose:  Database\\LostFoundDB.sql
-  3. Press Execute (F5). The script drops and recreates LostFoundDB,
-     creates the Items and Reports tables, and inserts 12 sample items.
+![The home page: the tagline sits across a coral and navy seam](docs/home.jpg)
 
-Option B - using a Command Prompt / PowerShell window
-  Copy this line into PowerShell and press Enter (adjust the folder if needed):
+## What it does
 
-  sqlcmd -S "(localdb)\MSSQLLocalDB" -E -i "C:\Users\Lenovo\Desktop\Campus Lost & Found\CampusLostFound\Database\LostFoundDB.sql"
+- **Report** a lost or found item, with an optional photo, in one form
+- **Browse** every item in a card grid, filtered by category, sorted, and paged 9 at a time
+- **Search** by keyword, category, location and status, in any combination
+- **Manage** the register on an admin page: add, edit, delete, and change a status in one click
+- **See** the four newest items on the home page, switchable between Lost, Found and Claimed
 
-  If you see "TotalItems 12" and "TotalReports 12", it worked.
+## Pages
 
-STEP 2 - OPEN THE PROJECT
--------------------------
-  Double-click:  CampusLostFound.sln
-  (Visual Studio opens the whole solution.)
+| Page | Purpose |
+| --- | --- |
+| `Default.aspx` | Home: tagline, three calls to action, four recently reported items |
+| `About.aspx` | Why the portal exists, how reporting works, and how to claim an item |
+| `Items.aspx` | All items as cards, with category filter, sorting and pagination |
+| `Search.aspx` | Keyword, category, location and status filters with a result count |
+| `Report.aspx` | The report form, 10 fields, validation, photo upload |
+| `Admin.aspx` | The register as an editable table, plus an add-item form |
+| `Error.aspx` | Friendly error page, served by `<customErrors>` |
 
-STEP 3 - CHECK THE CONNECTION STRING
---------------------------------------
-  Open Web.config and look at the <connectionStrings> section.
-  It should read:
+The Admin page is linked from the footer, not the main menu. There is no login, by design.
 
-  <add name="LostFoundDB"
-       connectionString="Data Source=(LocalDB)\MSSQLLocalDB;Initial Catalog=LostFoundDB;Integrated Security=True;MultipleActiveResultSets=True"
-       providerName="System.Data.SqlClient" />
+## Screens
 
-  If your database lives somewhere else, change only the
-  "Data Source=..." and "Initial Catalog=..." parts.
+| Items | Report |
+| --- | --- |
+| ![Item cards with Lost, Found and Claimed badges](docs/items.jpg) | ![The report form](docs/report.jpg) |
 
-STEP 4 - RUN IT
----------------
-  Press F5 (or the green Start button).
-  Your browser opens on http://localhost:<port>/Default.aspx
+| Admin |
+| --- |
+| ![The editable admin table](docs/admin.jpg) |
 
-PAGES
------
-  Default.aspx   Home: hero banner, 3 buttons, recently reported items
-  About.aspx     Purpose, how it works, reporting steps, claiming rules
-  Items.aspx     All items, category filter, sorting, pagination
-  Search.aspx    Search by keyword, category, location and status
-  Report.aspx    Report a lost or found item (with optional photo)
-  Admin.aspx     Add / edit / delete items, one-click status change
-  Error.aspx     Friendly error page (used by <customErrors>)
+## Tech stack
 
-  The Admin page is linked from the footer, not from the main menu.
+| Layer | Choice |
+| --- | --- |
+| Framework | ASP.NET Web Forms, .NET Framework 4.8 |
+| Language | C# |
+| Database | SQL Server Express LocalDB |
+| Data access | ADO.NET (`SqlCommand` with parameters, `SqlDataAdapter`) |
+| Front end | One master page, one stylesheet, plain HTML/CSS and a small JS file |
+| Tooling | Visual Studio 2022 or newer, IIS Express |
 
-HOW THE DATABASE IS USED
-------------------------
-  Items    - one row per reported item (name, description, category,
-             location, date, status, image, contact).
-  Reports  - one row per report (who reported it and how).
-             Reports.ItemID is a foreign key with ON DELETE CASCADE,
-             so deleting an item also deletes its report rows.
+## Getting started
 
-  All database access goes through DbHelper.cs and uses parameterised
-  SqlCommand queries, so the app is safe from SQL injection.
+### 1. What you need
 
-TROUBLESHOOTING
----------------
-  "We could not connect to the database..."
-      -> The database does not exist yet. Repeat Step 1.
-      -> Or the connection string in Web.config points to the wrong server.
+- Visual Studio 2022 (or newer) with the **ASP.NET and web development** workload
+- SQL Server Express LocalDB, which Visual Studio installs with that workload
 
-  "Cannot open database LostFoundDB requested by the login"
-      -> Run the SQL script again while connected to (localdb)\MSSQLLocalDB.
+### 2. Create the database (once)
 
-  Photos do not appear
-      -> Check that Images\\items\\*.jpg exist. Items with a missing file
-         automatically show Images\\placeholder.jpg.
+Clone the repository, then run the script from the folder that contains it:
 
-  Upload fails
-      -> Only JPG and PNG files up to 4 MB are accepted.
+```powershell
+git clone https://github.com/yezawtun-afk/Campus-Lost-Found.git
+cd "Campus-Lost-Found"
+sqlcmd -S "(localdb)\MSSQLLocalDB" -E -i "CampusLostFound\Database\LostFoundDB.sql"
+```
 
-FOLDER MAP
-----------
-  Content\\Site.css            one shared stylesheet (navy + coral theme)
-  Site.master                 shared header, navigation and footer
-  Database\\LostFoundDB.sql    create tables + 12 sample items
-  DbHelper.cs                 connection + query helpers
-  Images\\                     hero, about, placeholder and item photos
-  Images\\_source\\             the SVG artwork the JPGs were made from
+You should see:
 
-Built for a group project - no login or authentication is used.
+```
+TotalItems  TotalReports
+----------  ------------
+        12            12
+```
+
+The script drops and recreates `LostFoundDB`, so running it again resets the sample data.
+
+If you prefer SQL Server Management Studio: connect to `(localdb)\MSSQLLocalDB`, open
+`CampusLostFound\Database\LostFoundDB.sql`, and press Execute.
+
+### 3. Open and run
+
+1. Double-click `CampusLostFound.sln`.
+2. Press **F5**. The site opens at `http://localhost:44300/`.
+
+The connection string in `Web.config` already points at LocalDB:
+
+```xml
+<add name="LostFoundDB"
+     connectionString="Data Source=(LocalDB)\MSSQLLocalDB;Initial Catalog=LostFoundDB;Integrated Security=True;MultipleActiveResultSets=True"
+     providerName="System.Data.SqlClient" />
+```
+
+If your database lives elsewhere, change only `Data Source=` and `Initial Catalog=`.
+
+### 4. Try it
+
+- Search for **Wallet**: both wallets come back.
+- Enter a search and press **Enter** instead of clicking Search.
+- Open `Admin.aspx` from the footer and change a status, then delete a row (it asks first).
+
+## Database
+
+Two tables, one relationship.
+
+| Table | Columns |
+| --- | --- |
+| `Items` | `ItemID` identity key, `ItemName`, `Description`, `Category`, `Location`, `DateReported`, `Status` (Lost / Found / Claimed, with a CHECK constraint), `ImagePath`, `ContactInfo` |
+| `Reports` | `ReportID` identity key, `ItemID` foreign key to `Items` with `ON DELETE CASCADE`, `ReporterName`, `StudentStaffID`, `ReportType` (Lost / Found), `ReportDate` |
+
+`Report.aspx` writes both rows inside one `SqlTransaction`, so an item is never saved
+without its report. Deleting an item on the admin page removes its report rows too.
+
+## Project structure
+
+```
+Campus Lost & Found/
+  CampusLostFound.sln          Visual Studio solution
+  docs/                        screenshots used by this README
+  CampusLostFound/
+    Site.master                shared header, navigation and footer
+    Content/Site.css           the whole design system
+    Content/site.js            page fades and the home status switch
+    Default.aspx               home
+    About.aspx                 about and how it works
+    Items.aspx                 browse, filter, sort, page
+    Search.aspx                search
+    Report.aspx                report form
+    Admin.aspx                 admin table and add form
+    Error.aspx                 custom error page
+    DbHelper.cs                connection + query helpers
+    Database/LostFoundDB.sql   schema and 12 sample items
+    Images/                    hero, about, placeholder and item photos
+    Web.config                 connection string and customErrors
+    README.txt                 the same instructions as plain text
+```
+
+All database access goes through `DbHelper.cs` and uses parameterised queries, so the
+pages are safe from SQL injection.
+
+## Troubleshooting
+
+| Symptom | Fix |
+| --- | --- |
+| "We could not connect to the database" | The database does not exist yet. Repeat step 2. |
+| "Cannot open database LostFoundDB requested by the login" | Run the SQL script again while connected to `(localdb)\MSSQLLocalDB`. |
+| An item shows a grey placeholder photo | Its image file is missing from `Images/items/`. The placeholder is expected. |
+| A photo upload is rejected | Only JPG and PNG up to 4 MB are accepted. |
+
+---
+
+Built as a group project. No login or authentication is used.
