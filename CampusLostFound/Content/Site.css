@@ -19,6 +19,12 @@
     --coral: #ff5c45;
     --coral-dark: #d93b22;
 
+    /* Hero field only. One step deeper than --coral, so white display type
+       clears the large-text contrast floor with margin: 3.67:1 instead of
+       3.06:1. The rest of the site keeps the brighter brand coral, because
+       every other coral field carries navy text, not white. */
+    --coral-hero: #f04a30;
+
     /* Fields (one colour per chapter) */
     --field-paper: #eef1f3;
     --field-white: #ffffff;
@@ -729,7 +735,7 @@ li { margin-bottom: 0.4rem; }
     position: absolute;
     inset: 0 0 auto 0;
     height: var(--waterline);
-    background: var(--field-coral);
+    background: var(--coral-hero);
 }
 
 .hero-inner {
