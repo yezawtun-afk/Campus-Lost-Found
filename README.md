@@ -30,13 +30,14 @@ The Admin page is linked from the footer, not the main menu. There is no login, 
 
 ## Screens
 
-| Items | Report |
-| --- | --- |
-| ![Item cards with Lost, Found and Claimed badges](docs/items.jpg) | ![The report form](docs/report.jpg) |
+**Items** - cards with Lost, Found and Claimed badges, filter and sort
+![Item cards with Lost, Found and Claimed badges](docs/items.jpg)
 
-| Admin |
-| --- |
-| ![The editable admin table](docs/admin.jpg) |
+**Report** - one form for both report types, with validation and photo upload
+![The report form](docs/report.jpg)
+
+**Admin** - the register as an editable table, plus an add-item form
+![The editable admin table](docs/admin.jpg)
 
 ## Tech stack
 
