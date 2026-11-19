@@ -147,7 +147,7 @@ TROUBLESHOOTING
          automatically show Images\placeholder.jpg.
 
   Upload fails
-      -> Only JPG and PNG files up to 4 MB are accepted.
+      -> Only JPG, JPEG and PNG files up to 4 MB are accepted.
 
 
 FOLDER MAP

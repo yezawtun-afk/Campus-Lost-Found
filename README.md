@@ -25,7 +25,7 @@ Then press **F5** in Visual Studio. Everything else below is the slow, explained
 - **Browse** every item in a card grid, filtered by category, sorted, and paged 9 at a time
 - **Search** by keyword, category, location and status, in any combination
 - **Manage** the register on an admin page: add, edit, delete, and change a status in one click
-- **See** the four newest items on the home page, switchable between Lost, Found and Claimed
+- **See** the four newest items on the home page, switchable between All, Lost, Found and Claimed
 
 ## Pages
 
@@ -46,11 +46,11 @@ The Admin page is linked from the footer, not the main menu. There is no login, 
 **Items** - cards with Lost, Found and Claimed badges, filter and sort
 ![Item cards with Lost, Found and Claimed badges](docs/items.jpg)
 
-**Report** - one form for both report types, with validation and photo upload
-![The report form](docs/report.jpg)
+**Report** - one form for both report types: labelled fields, validation and photo upload
+![The report form, filled in](docs/report-form.jpg)
 
-**Admin** - the register as an editable table, plus an add-item form
-![The editable admin table](docs/admin.jpg)
+**Admin** - the register as an editable table, with a one-click status dropdown and row actions
+![The editable admin table](docs/admin-table.jpg)
 
 ## Setup tutorial
 
@@ -187,9 +187,10 @@ or if you moved the project to another computer.
 | "We could not connect to the database" | The database does not exist yet. Repeat step 2. |
 | "Cannot open database LostFoundDB requested by the login" | Run the SQL script again while connected to `(localdb)\MSSQLLocalDB`. |
 | `sqlcmd` is not recognised | Open a new PowerShell window after installing Visual Studio, or run it from the SQL Server tools folder. |
+| **HTTP Error 500.19**, or "cannot read configuration file", after a ZIP download | Windows blocks files that came from a downloaded ZIP. Right-click the ZIP, choose **Properties**, tick **Unblock**, and extract again. If you already extracted, run `Get-ChildItem -Recurse \| Unblock-File` inside the extracted folder. |
 | The browser opens but the page is blank or shows an error | Check that step 2 printed 12 and 12, then reload. |
 | An item shows a grey placeholder photo | Its image file is missing from `Images/items/`. The placeholder is expected. |
-| A photo upload is rejected | Only JPG and PNG up to 4 MB are accepted. |
+| A photo upload is rejected | Only JPG, JPEG and PNG files up to 4 MB are accepted. |
 | F5 asks to configure IIS Express | Accept the defaults; the project's launch settings are already in `CampusLostFound.csproj`. |
 
 ## Tech stack
@@ -218,9 +219,10 @@ without its report. Deleting an item on the admin page removes its report rows t
 ## Project structure
 
 ```
-Campus Lost & Found/
+Campus-Lost-Found/
   CampusLostFound.sln          Visual Studio solution
-  docs/                        screenshots used by this README
+  README.md                    this file
+  docs/                        screenshots used by this README, the report and the slides
   CampusLostFound/
     Site.master                shared header, navigation and footer
     Content/Site.css           the whole design system
@@ -235,6 +237,8 @@ Campus Lost & Found/
     DbHelper.cs                connection + query helpers
     Database/LostFoundDB.sql   schema and 12 sample items
     Images/                    hero, about, placeholder and item photos
+    Images/_source/            the SVG artwork the item photos were made from
+    Properties/                assembly metadata
     Web.config                 connection string and customErrors
     README.txt                 the same instructions as plain text
 ```
